@@ -29,7 +29,7 @@ def build_exception_response(error=RESPERR.GENERIC_ERROR,status=HttpResponseBadR
 
 class TweetViewSet(viewsets.ModelViewSet):
     serializer_class = TweetSerializer
-    queryset = Tweet.objects.all()
+    queryset = Tweet.objects.all().order_by('-stamp',)
 
     @list_route(methods=['PUT'])
     def upload(self, request):
@@ -45,4 +45,3 @@ class TweetViewSet(viewsets.ModelViewSet):
       except Exception, exc:
           return build_exception_response()
         
-
