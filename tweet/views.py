@@ -30,6 +30,12 @@ def build_exception_response(error=RESPERR.GENERIC_ERROR,status=HttpResponseBadR
 class TweetViewSet(viewsets.ModelViewSet):
     serializer_class = TweetSerializer
     queryset = Tweet.objects.all().order_by('-stamp',)
+    paginate_by = 100
+
+    def get_queryset(self):
+        res = super(TweetViewSet,self).get_queryset()
+        last_pk = self.request.REQUEST.get('last_pk',None)
+        return res.filter(pk__gt=last_pk) if last_pk else res
 
     @list_route(methods=['PUT'])
     def upload(self, request):
