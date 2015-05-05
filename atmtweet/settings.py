@@ -160,6 +160,8 @@ STATIC_URL = '{}/static/'.format(FORCE_SCRIPT_NAME)
 
 STATICFILES_DIRS = (
 #     os.path.abspath(os.path.join(BASE_DIR, "../../static/")),
+    #PAOLO - Serviamo anche la UI Client
+    os.path.abspath(os.path.join(PROJECT_PATH, '..', '..', 'atm-tweet-client/www')),    
 )
 
 # List of finder classes that know how to find static files in
