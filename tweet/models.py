@@ -1,13 +1,11 @@
-import os
-#from django.db import models
-#from django.contrib.auth.models import User
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
+# -*- coding: utf-8 -*-
+
 
 from django.contrib.gis.db import models
 
 
-
+#from django.db import models
+#from django.contrib.auth.models import User
 class Tweet (models.Model):
 	TIPO = (
         (0, 'Non evento'),
