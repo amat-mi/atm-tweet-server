@@ -41,8 +41,7 @@ class TweetViewSet(viewsets.ModelViewSet):
     def upload(self, request):
       try:          
           serializer_class = self.get_serializer_class()  
-          serializer = serializer_class(data=request.DATA, many=True, partial=True,
-                                        allow_add_remove=False)
+          serializer = serializer_class(data=request.data, many=False, partial=True)          
           if serializer.is_valid():
               serializer.save()                                                
               return build_message_response('OK')
