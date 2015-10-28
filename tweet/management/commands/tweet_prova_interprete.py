@@ -13,12 +13,16 @@ from tweet.models import Tweet
 
 
 def tweet_interpreter(dict_tweet):
-    #normalizza con valori di default
-    dict_tweet.setdefault('tipo',0)    
-    dict_tweet.setdefault('stamp',datetime.now().isoformat())    
     # TODO: verificare se necessario filtrare i twitter con reply !=0 per eliminare i tweet di risposta ad utenti #if not row['reply']
     # TODO: verificare se necessario filtrare i RT
     testo = dict_tweet['testo']    
+    #normalizza con valori di default
+    dict_tweet.setdefault('tipo',0)    
+    dict_tweet.setdefault('stamp',datetime.now().isoformat())    
+    ### estrae l'eventuale causa (Es: "(lavori stradali)") e la imposta, se non già presente
+    match = re.search(r'\((.+)\)',testo)
+    causa = match.group(1) if match else None 
+    dict_tweet.setdefault('causa',causa)    
     ### se un tweet inizia con un numero viene escluso perchè contiene info su date future
     if re.match(r'(\d)',testo[0]):
         return [dict_tweet]
@@ -39,6 +43,7 @@ def tweet_interpreter(dict_tweet):
     for linea in linee:
         d = {'stamp': dict_tweet['stamp'],
              'testo': dict_tweet['testo'],
+             'causa': causa
              }
         #in codice Linea separa testo e numero e sostituisce con singolo carattere (Es: 'bus58'=>'B58')
         m = re.search(r'\#(\w+)(\d+)',linea)    
