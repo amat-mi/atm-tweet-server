@@ -18,6 +18,7 @@ class Tweet (models.Model):
 	stamp_evento = models.DateTimeField(auto_now=False, null=True,blank=True)
 	root_tweet = models.ForeignKey('self', null=True,blank=True)
 	linea = models.CharField(max_length='50', null=True,blank=True)
+	causa = models.CharField(max_length='100', null=True,blank=True)
 	testo = models.CharField(max_length='250', null=False,blank=False)
 
 	class Meta: # creare la classe meta per sistemare il plurale dell admin
