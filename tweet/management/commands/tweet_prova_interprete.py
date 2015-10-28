@@ -57,13 +57,12 @@ def tweet_interpreter(dict_tweet):
     return interpreted_tweet
 
 def do_it():
-#   tweet = Tweet.objects.get(pk=6137)
+#   for tweet in [Tweet.objects.get(pk=6137)]:
   for tweet in Tweet.objects.exclude(testo__iregex=r'^RT'):#.exclude(tipo=1):
     res = tweet_interpreter({'testo': tweet.testo, 'stamp': tweet.stamp})
     for t in res:
-#       if 'linea' in t:
       tipo = t.get('tipo',0) 
-      if tipo != tweet.tipo: 
+      if tipo != tweet.tipo or True: 
         print u"{} => {} {}".format(tweet.tipo,tipo,t)
   
 class Command(NoArgsCommand):
