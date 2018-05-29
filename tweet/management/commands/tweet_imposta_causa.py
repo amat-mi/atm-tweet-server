@@ -65,7 +65,7 @@ def do_it():
     for t in res:
       causa = t.get('causa',None) 
       if causa: 
-        print u"{} => {} {}".format(tweet.tipo,causa,t)
+        print(u"{} => {} {}".format(tweet.tipo,causa,t))
         tweet.causa = causa
         tweet.full_clean()
         tweet.save()

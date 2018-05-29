@@ -7,7 +7,7 @@ class TweetSerializer(serializers.ModelSerializer):
 
 
   def get_evento(self,obj):
-    print obj.get_tipo_display()
+    print(obj.get_tipo_display())
     return obj.get_tipo_display()
 
   class Meta:
