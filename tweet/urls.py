@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from rest_framework.routers import SimpleRouter
 
 from .views import TweetViewSet
@@ -13,7 +13,7 @@ router.register(r'tweet', TweetViewSet)
 
 
 ##### Aggiunta degli url ####################################
-urlpatterns =  patterns('',
+urlpatterns =  [
     url(r'^', include(router.urls)),
-)
+]
 
