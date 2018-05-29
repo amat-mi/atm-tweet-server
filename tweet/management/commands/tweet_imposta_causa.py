@@ -86,7 +86,7 @@ class Command(NoArgsCommand):
       do_it()
 #       transaction.commit()
       self.printline('Fine')
-    except Exception, exc:
+    except Exception as exc:
 #       transaction.rollback()
       raise CommandError(self.help + "\n" + str(exc))
 #     finally:

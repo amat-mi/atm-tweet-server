@@ -63,7 +63,7 @@ def do_it():
     for t in res:
       tipo = t.get('tipo',0) 
       if tipo != tweet.tipo or True: 
-        print u"{} => {} {}".format(tweet.tipo,tipo,t)
+        print(u"{} => {} {}".format(tweet.tipo,tipo,t))
   
 class Command(NoArgsCommand):
   help = 'Prova interprete Tweet'
@@ -81,7 +81,7 @@ class Command(NoArgsCommand):
       do_it()
 #       transaction.commit()
       self.printline('Fine')
-    except Exception, exc:
+    except Exception as exc:
 #       transaction.rollback()
       raise CommandError(self.help + "\n" + str(exc))
 #     finally:
