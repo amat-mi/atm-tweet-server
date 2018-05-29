@@ -16,7 +16,7 @@ class Tweet (models.Model):
 	tipo = models.IntegerField(max_length=1, choices=TIPO, null=False,blank=False)
 	stamp = models.DateTimeField(auto_now=False, null=False,blank=False)
 	stamp_evento = models.DateTimeField(auto_now=False, null=True,blank=True)
-	root_tweet = models.ForeignKey('self', null=True,blank=True)
+	root_tweet = models.ForeignKey('self', null=True,blank=True, on_delete=models.CASCADE)
 	linea = models.CharField(max_length='50', null=True,blank=True)
 	causa = models.CharField(max_length='100', null=True,blank=True)
 	testo = models.CharField(max_length='250', null=False,blank=False)
