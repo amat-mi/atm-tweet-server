@@ -25,8 +25,7 @@ print(u'With mnt: "{}"'.format(MNT_PATH))
 print(u'Development machine: "{}"'.format('yes' if IS_DEVELOPMENT_MACHINE else 'no'))
 print(u'Debug: "{}"'.format('yes' if DEBUG else 'no'))
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP, \
-  FORCE_SCRIPT_NAME
+from django.conf.global_settings import FORCE_SCRIPT_NAME
 
 #PAOLO - following lines are to "mount" project under a subpath of the domain (ie: "example.com/project/")
 #WARN!!! The same subpath must be correctly setup in configuring the HTTP front server!!!
@@ -68,6 +67,22 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'atmtweet.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 WSGI_APPLICATION = 'atmtweet.wsgi.application'
 
@@ -170,13 +185,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
-
-
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    #PAOLO - Following is to have the "request" object inside templates,
-    #see: http://stackoverflow.com/questions/2882490/get-the-current-url-within-a-django-template
-    'django.core.context_processors.request',
 )
 
 
