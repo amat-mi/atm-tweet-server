@@ -6,7 +6,7 @@ import re
 import sys
 
 from django.core.files.base import ContentFile
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 from tweet.models import Tweet
@@ -65,7 +65,7 @@ def do_it():
       if tipo != tweet.tipo or True: 
         print(u"{} => {} {}".format(tweet.tipo,tipo,t))
   
-class Command(NoArgsCommand):
+class Command(BaseCommand):
   help = 'Prova interprete Tweet'
   
   def printline(self,msg):
