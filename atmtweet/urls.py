@@ -23,7 +23,7 @@ urlpatterns = [
 
 urlpatterns = format_suffix_patterns(urlpatterns)
 
-urlpatterns = [
+urlpatterns += [
     url(r'^docs/', get_swagger_view(title='AMAT ATM Tweet API'))
 ]
 
