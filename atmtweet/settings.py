@@ -216,5 +216,5 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_PAGINATION_SERIALIZER_CLASS': 'tweet.pagination.CustomPaginationSerializer',
-    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.backends.DjangoFilterBackend',)
 }
