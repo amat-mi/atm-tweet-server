@@ -1,7 +1,9 @@
 # coding: utf-8
 
 from django.http.response import HttpResponse, HttpResponseBadRequest
-from rest_framework import viewsets
+from oauth2_provider.contrib.rest_framework.authentication import OAuth2Authentication
+from oauth2_provider.contrib.rest_framework.permissions import TokenHasScope
+from rest_framework import viewsets, mixins
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 
@@ -27,17 +29,25 @@ def build_exception_response(error=RESPERR.GENERIC_ERROR,status=HttpResponseBadR
     return build_error_response(error,status,message=traceback.format_exc())
 
 
-class TweetViewSet(viewsets.ModelViewSet):
+class TweetViewSet(mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.ListModelMixin,
+                   viewsets.GenericViewSet):
     serializer_class = TweetSerializer
     queryset = Tweet.objects.all().order_by('-stamp',)
     paginate_by = 100
+    required_scopes = ['tweet']
 
     def get_queryset(self):
         res = super(TweetViewSet,self).get_queryset()
         last_pk = self.request.query_params.get('last_pk',None)
         return res.filter(pk__gt=last_pk) if last_pk else res
 
-    @list_route(methods=['PUT'])
+    @list_route(methods=['POST'],
+                authentication_classes = [OAuth2Authentication],
+#                 permission_classes = [permissions.IsAuthenticated, TokenHasScope],
+                permission_classes = [TokenHasScope],
+                )
     def upload(self, request):
       try:          
           serializer_class = self.get_serializer_class()  
