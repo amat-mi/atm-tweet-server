@@ -52,7 +52,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_filters',
     'rest_framework.filters',
-    'rest_framework_swagger',
     'tweet',
 )
 
