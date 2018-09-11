@@ -4,5 +4,6 @@ encoding//atmtweet/urls.py=utf-8
 encoding//tweet/management/commands/tweet_imposta_causa.py=utf-8
 encoding//tweet/management/commands/tweet_prova_interprete.py=utf-8
 encoding//tweet/models.py=utf-8
+encoding//tweet/pagination.py=utf-8
 encoding//tweet/urls.py=utf-8
 encoding//tweet/views.py=utf-8
