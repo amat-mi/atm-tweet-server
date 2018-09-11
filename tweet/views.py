@@ -9,6 +9,7 @@ from rest_framework.response import Response
 
 from .models import Tweet
 from .serializers import TweetSerializer
+from tweet.pagination import StandardPagination
 
 
 # Decoratore #####################################
@@ -34,8 +35,8 @@ class TweetViewSet(mixins.CreateModelMixin,
                    mixins.ListModelMixin,
                    viewsets.GenericViewSet):
     serializer_class = TweetSerializer
+    pagination_class = StandardPagination
     queryset = Tweet.objects.all().order_by('-stamp',)
-    paginate_by = 100
     required_scopes = ['tweet']
 
     def get_queryset(self):
